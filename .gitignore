@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# wp-env / local artifacts
+.wp-env.override.json
+
+# Playwright / screenshots from verification
+.playwright-mcp/
+
+# OS noise
+.DS_Store
+
+# Build artifacts — attach the zip to GitHub Releases, don't commit it
+/wove.zip
+*.zip
+
+# Editor noise
+.vscode/
+.idea/

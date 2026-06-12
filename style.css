@@ -1,0 +1,505 @@
+/*
+Theme Name: Wove
+Theme URI: https://github.com/samaybhavsar/wove
+Author: Samay Bhavsar
+Author URI: https://samay.io
+Description: A minimal, typographic block theme for a personal site and blog. Elegant self-hosted serif throughout, a monochrome palette with automatic dark mode, and a reading-first layout. Customize your name, bio, and social links from the backend — no code required.
+Version: 1.0.0
+Requires at least: 6.6
+Tested up to: 7.0
+Requires PHP: 7.4
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wove
+Domain Path: /languages
+Tags: blog, one-column, block-patterns, full-site-editing, editor-style, featured-images, threaded-comments, translation-ready, accessibility-ready, custom-colors, sticky-post
+*/
+
+/*
+ * Almost all design lives in theme.json. The rules below cover the few things
+ * theme.json cannot express. Keep this file small.
+ */
+
+/* Refined text selection. */
+::selection {
+	background: var(--wp--preset--color--contrast);
+	color: var(--wp--preset--color--base);
+}
+
+/* Smooth scrolling for in-page anchors. */
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+/*
+ * Optical sizing. Newsreader ships an optical-size (opsz) axis, so the browser
+ * tunes letterforms to the rendered size — sturdier at small sizes, finer at
+ * display. This is the default; set explicitly for clarity. (Weights are applied
+ * via font-weight, never font-variation-settings, so automatic opsz stays active.)
+ *
+ * The full type scale lives in theme.json (explicit clamp() sizes with the fluid
+ * engine disabled), so there are no font-size overrides here anymore.
+ */
+body {
+	font-optical-sizing: auto;
+}
+
+/* Optical refinements for display headings (small caps tracking on the eyebrow/role line). */
+.wove-eyebrow {
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	color: var(--wp--preset--color--muted);
+}
+
+/* Post meta line under titles. */
+.wove-meta {
+	color: var(--wp--preset--color--muted);
+	font-style: italic;
+}
+
+/* Single-post previous/next navigation: lay the two links out on one row. */
+.wp-block-post-navigation-link {
+	display: inline-block;
+}
+
+/* Give the blog/archive post list breathing room between items. */
+.wove-post-list .wp-block-post-template > li + li {
+	margin-block-start: var(--wp--preset--spacing--60);
+	border-block-start: 1px solid var(--wp--preset--color--rule);
+	padding-block-start: var(--wp--preset--spacing--60);
+}
+
+/* Home "Writing" index: a year column beside each title, ledger-style. */
+.wove-writing-index .wove-writing-row {
+	align-items: flex-start;
+}
+
+.wove-writing-index .wp-block-post-date {
+	flex: 0 0 3.25rem;
+	margin: 0;
+	/* Same line-height as the body text so the row matches the bio. */
+	line-height: 1.6;
+	color: var(--wp--preset--color--muted);
+	font-variant-numeric: tabular-nums;
+}
+
+.wove-writing-index .wp-block-post-title {
+	margin: 0;
+	line-height: 1.6;
+}
+
+/* Titles sit quiet (muted, like the body text) and come forward to ink on hover/focus. */
+.wove-writing-index .wp-block-post-title a {
+	color: var(--wp--preset--color--muted);
+}
+
+.wove-writing-index .wp-block-post-title a:hover,
+.wove-writing-index .wp-block-post-title a:focus {
+	color: var(--wp--preset--color--contrast);
+}
+
+/* Hanging underline that doesn't crowd descenders. */
+a {
+	text-underline-offset: 0.18em;
+	text-decoration-thickness: 1px;
+}
+
+/*
+ * Home page: the intro hero already announces the name in large serif, so the
+ * header wordmark would be a duplicate there. Hide it on the front page only
+ * (it still shows on interior pages for orientation), and keep the nav aligned
+ * to the right now that the wordmark is gone.
+ */
+.home .site-header__bar .wp-block-site-title {
+	display: none;
+}
+
+.home .site-header__bar {
+	justify-content: flex-end;
+}
+
+/*
+ * Hero name = the Site Title block (so it reads from Settings), styled like the
+ * masthead. It uses the `display` font-size preset; the line-height + tracking here
+ * give it the tight, confident set of display type.
+ *
+ * Sizing note: the header wordmark (core/site-title, 1.125rem ≈ 18px) and the nav
+ * links (core/navigation, 0.9375rem ≈ 15px, matching the icon glyphs) are set in
+ * theme.json and now render at fixed sizes — the fluid engine is disabled, so they
+ * no longer need pinning here.
+ */
+.wp-block-site-title.wove-hero-name {
+	font-family: var(--wp--preset--font-family--serif);
+	font-weight: 500;
+	line-height: 1.05;
+	letter-spacing: -0.025em;
+}
+
+/* Intro-hero portrait: round; cap the size and center it once columns stack on mobile. */
+.hero-portrait img {
+	border-radius: 50%;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+}
+
+/* A small, subtle fade-in for the portrait (skipped when motion is reduced). */
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes wove-fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.hero-portrait img {
+		animation: wove-fade-in 2s cubic-bezier(0.33, 1, 0.68, 1) both;
+	}
+}
+
+@media (max-width: 781px) {
+	.hero-portrait img {
+		display: block;
+		max-width: 300px;
+		margin-inline: auto;
+	}
+}
+
+/*
+ * Accessibility: a clearly visible keyboard focus indicator. On a monochrome
+ * palette a colour-only focus change isn't reliable, so draw an explicit
+ * outline for keyboard (focus-visible) users on every interactive element.
+ */
+:where(a, button, input, summary, .wp-block-navigation-item a, .wp-block-search__button):focus-visible {
+	outline: 2px solid var(--wp--preset--color--contrast);
+	outline-offset: 3px;
+	border-radius: 1px;
+}
+
+/* Skip link: visually hidden until focused, then revealed top-left for keyboard users. */
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.skip-link:focus {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	z-index: 1000;
+	width: auto;
+	height: auto;
+	clip: auto;
+	margin: 0;
+	padding: 0.6rem 1rem;
+	background: var(--wp--preset--color--contrast);
+	color: var(--wp--preset--color--base);
+	text-decoration: none;
+	border-radius: 4px;
+}
+
+/* A quiet colour fade on link hover/focus (disabled when motion is reduced). */
+a {
+	transition: color 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	a {
+		transition: none;
+	}
+}
+
+/*
+ * Touch targets: on small screens give inline text links a taller hit area and
+ * pagination a ~44px box, per WCAG / Apple HIG / Material minimums.
+ */
+@media (max-width: 781px) {
+	.wove-social a,
+	.wp-block-post-navigation-link a,
+	.wp-block-query-pagination .wp-block-query-pagination-previous,
+	.wp-block-query-pagination .wp-block-query-pagination-next {
+		display: inline-block;
+		padding-block: 0.55rem;
+	}
+
+	.wp-block-query-pagination .page-numbers {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+	}
+
+	/* Keep the contact row from feeling cramped now that links are taller. */
+	.wove-social {
+		line-height: 2;
+	}
+}
+
+/*
+ * Long-form post content: refinements theme.json can't express. Scoped to
+ * .wp-block-post-content so they never affect the home / listing layouts.
+ */
+
+/* Breathing room above in-content headings for reading rhythm. */
+.wp-block-post-content :is(h2, h3, h4, h5, h6) {
+	margin-top: var(--wp--preset--spacing--50);
+}
+
+/* Inline code (distinct from code blocks). */
+.wp-block-post-content :not(pre) > code {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.9em;
+	background: var(--wp--preset--color--faint);
+	padding: 0.15em 0.4em;
+	border-radius: 3px;
+}
+
+/* Captions: centred, with space above (colour/size come from theme.json elements.caption). */
+.wp-block-image figcaption,
+figure.wp-block-table figcaption,
+.wp-element-caption {
+	text-align: center;
+	margin-top: 0.6rem;
+}
+
+/* Tables: tidy cells + horizontal scroll on small screens instead of overflow. */
+.wp-block-table {
+	overflow-x: auto;
+}
+
+.wp-block-table table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.wp-block-table th,
+.wp-block-table td {
+	border: 1px solid var(--wp--preset--color--rule);
+	padding: 0.5rem 0.75rem;
+	text-align: left;
+}
+
+.wp-block-table th {
+	font-weight: 600;
+}
+
+/* Single-post meta row (date · category · reading time). */
+.wove-post-meta {
+	align-items: baseline;
+	color: var(--wp--preset--color--muted);
+}
+
+.wove-post-meta .wp-block-post-date,
+.wove-post-meta .wp-block-post-terms,
+.wove-post-meta p {
+	margin: 0;
+	color: var(--wp--preset--color--muted);
+}
+
+.wove-post-meta a {
+	color: var(--wp--preset--color--muted);
+}
+
+/* Active navigation item (the theme adds aria-current="page" to the matching link). */
+.wp-block-navigation a[aria-current="page"] {
+	text-decoration: underline;
+	text-underline-offset: 0.3em;
+	font-weight: 600;
+}
+
+/* Comments: quiet and on-brand, separated from the post. */
+.wove-comments {
+	border-top: 1px solid var(--wp--preset--color--rule);
+	padding-top: var(--wp--preset--spacing--50);
+}
+
+.wove-comments .wp-block-comment-author-name a,
+.wove-comments .wp-block-comment-date a {
+	color: var(--wp--preset--color--muted);
+	text-decoration: none;
+}
+
+.wove-comments .wp-block-comment-template > li + li {
+	margin-top: var(--wp--preset--spacing--40);
+	border-top: 1px solid var(--wp--preset--color--rule);
+	padding-top: var(--wp--preset--spacing--40);
+}
+
+/* Header icon buttons — the search, the theme toggle, and the mobile menu's
+   open (☰) and close (✕) buttons all share one centred box, so every icon in the
+   header matches in size and sits on the same baseline. The search wrapper/button
+   is also flattened so core's taller form doesn't push its icon off-centre. */
+.wove-nav-cluster .wp-block-search,
+.wove-nav-cluster .wp-block-search__inside-wrapper {
+	display: inline-flex;
+	align-items: center;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.wove-nav-cluster .wp-block-search__button,
+.wove-nav-cluster .wp-block-navigation__responsive-container-open,
+.wove-nav-cluster .wp-block-navigation__responsive-container-close,
+.wove-theme-toggle {
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	min-height: 0;
+	padding: 0;
+	line-height: 1;
+	background: transparent;
+	color: var(--wp--preset--color--contrast);
+}
+
+/* Search + toggle are always present, so give them an explicit flex display.
+   The menu open (☰) / close (✕) buttons are shown and hidden by core at the
+   mobile breakpoint — we must NOT set their display here, or the ☰ would leak
+   onto desktop. */
+.wove-nav-cluster .wp-block-search__button,
+.wove-theme-toggle {
+	display: inline-flex;
+}
+
+.wove-nav-cluster .wp-block-search__button svg,
+.wove-nav-cluster .wp-block-navigation__responsive-container-open svg,
+.wove-nav-cluster .wp-block-navigation__responsive-container-close svg,
+.wove-theme-toggle svg {
+	width: 24px !important;
+	height: 24px !important;
+}
+
+/* The sun/moon glyphs are scaled down (via an inner <g>) to the magnifier's
+   ~15px footprint; non-scaling stroke keeps their line at a steady 1px so they
+   match the search icon's weight regardless of that scale. */
+.wove-theme-toggle svg * {
+	vector-effect: non-scaling-stroke;
+}
+
+.wove-nav-cluster .wp-block-search__button:hover,
+.wove-nav-cluster .wp-block-search__button:focus,
+.wove-nav-cluster .wp-block-navigation__responsive-container-open:hover,
+.wove-nav-cluster .wp-block-navigation__responsive-container-close:hover,
+.wove-theme-toggle:hover {
+	background: transparent;
+	color: var(--wp--preset--color--muted);
+}
+
+/*
+ * Mobile menu overlay. The header nav is right-justified, and that justification
+ * is inherited inside the full-screen overlay — which jams the links against the
+ * right edge and clips them. Centre the links and give the overlay comfortable
+ * padding so the open menu reads as a calm, balanced sheet.
+ */
+@media (max-width: 781px) {
+	.wove-nav-cluster .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.wove-nav-cluster .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		gap: var(--wp--preset--spacing--30);
+	}
+
+	/* Bigger, finger-friendly icon buttons (≥44px) on touch screens. */
+	.wove-nav-cluster .wp-block-search__button,
+	.wove-nav-cluster .wp-block-navigation__responsive-container-open,
+	.wove-nav-cluster .wp-block-navigation__responsive-container-close,
+	.wove-theme-toggle {
+		width: 2.75rem;
+		height: 2.75rem;
+	}
+
+	/* Keep the expanding search field from overflowing the narrow header bar. */
+	.wove-nav-cluster .wp-block-search__input {
+		max-width: min(56vw, 13rem);
+	}
+}
+
+/* Header right-hand cluster (nav + search + theme toggle). */
+.wove-nav-cluster {
+	align-items: center;
+}
+
+/* Dark-mode toggle button (box sizing shared with the search button rule above). */
+.wove-theme-toggle {
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: color 150ms ease-out;
+}
+
+/*
+ * The toggle shows the action — the mode you'll switch TO (the common convention
+ * for a clickable toggle): a crescent moon in light mode (tap for dark), a sun in
+ * dark mode (tap for light). Visibility is driven by the same data-theme /
+ * prefers-color-scheme signals as the rest of dark mode below, so the no-flash
+ * boot script paints the right glyph with no flicker and the JS needs no icon
+ * logic (it only flips data-theme + aria-pressed).
+ */
+.wove-theme-toggle .wove-icon-sun {
+	display: none;
+}
+
+:root[data-theme="dark"] .wove-theme-toggle .wove-icon-moon {
+	display: none;
+}
+
+:root[data-theme="dark"] .wove-theme-toggle .wove-icon-sun {
+	display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) .wove-theme-toggle .wove-icon-moon {
+		display: none;
+	}
+
+	:root:not([data-theme="light"]) .wove-theme-toggle .wove-icon-sun {
+		display: block;
+	}
+}
+
+/*
+ * Dark mode. Every theme.json style references these colour presets, so
+ * overriding the custom properties recolours the whole site. Applies when the OS
+ * prefers dark (and the visitor hasn't chosen light), or when data-theme="dark".
+ */
+:root[data-theme="dark"] {
+	--wp--preset--color--base: #15140f;
+	--wp--preset--color--contrast: #ece8df;
+	--wp--preset--color--muted: #9c978a;
+	--wp--preset--color--rule: #34322b;
+	--wp--preset--color--faint: #201f18;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--wp--preset--color--base: #15140f;
+		--wp--preset--color--contrast: #ece8df;
+		--wp--preset--color--muted: #9c978a;
+		--wp--preset--color--rule: #34322b;
+		--wp--preset--color--faint: #201f18;
+	}
+}

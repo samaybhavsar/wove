@@ -1,0 +1,445 @@
+# Copyright (C) 2026 Samay Bhavsar
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Wove 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/samaybhavsar/wove/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-12T20:48:23+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wove\n"
+
+#. Theme Name of the theme
+#: style.css
+#: functions.php:100
+#: functions.php:494
+#: functions.php:548
+msgid "Wove"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://github.com/samaybhavsar/wove"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "A minimal, typographic block theme for a personal site and blog. Elegant self-hosted serif throughout, a monochrome palette with automatic dark mode, and a reading-first layout. Customize your name, bio, and social links from the backend — no code required."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Samay Bhavsar"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://samay.io"
+msgstr ""
+
+#: functions.php:43
+#: functions.php:745
+msgctxt "Starter page title"
+msgid "Home"
+msgstr ""
+
+#: functions.php:49
+#: functions.php:746
+msgctxt "Starter page title"
+msgid "Blog"
+msgstr ""
+
+#: functions.php:53
+#: functions.php:747
+msgctxt "Starter page title"
+msgid "About"
+msgstr ""
+
+#: functions.php:54
+msgid "A few words about you — who you are and what you write about. Edit this on the About page."
+msgstr ""
+
+#: functions.php:58
+#: functions.php:748
+msgctxt "Starter page title"
+msgid "Contact"
+msgstr ""
+
+#: functions.php:119
+msgid "Reading time"
+msgstr ""
+
+#. translators: %d: estimated reading time in minutes.
+#: functions.php:128
+#, php-format
+msgid "· %d min read"
+msgstr ""
+
+#: functions.php:328
+msgid "Email"
+msgstr ""
+
+#: functions.php:329
+msgid "GitHub"
+msgstr ""
+
+#: functions.php:330
+msgid "LinkedIn"
+msgstr ""
+
+#: functions.php:331
+msgid "X"
+msgstr ""
+
+#: functions.php:332
+msgid "Mastodon"
+msgstr ""
+
+#: functions.php:333
+msgid "Instagram"
+msgstr ""
+
+#: functions.php:369
+msgid "RSS"
+msgstr ""
+
+#: functions.php:476
+#: functions.php:567
+msgctxt "Greeting above the name"
+msgid "Hi, I’m"
+msgstr ""
+
+#: functions.php:479
+msgid "A short introduction goes here — a sentence or two about who you are and what you write about. Edit this in Appearance → Wove."
+msgstr ""
+
+#: functions.php:493
+msgid "Wove Settings"
+msgstr ""
+
+#: functions.php:528
+msgid "Select intro photo"
+msgstr ""
+
+#: functions.php:529
+msgid "Use this photo"
+msgstr ""
+
+#: functions.php:551
+msgid "Settings saved."
+msgstr ""
+
+#: functions.php:558
+msgid "Home intro"
+msgstr ""
+
+#: functions.php:559
+msgid "The greeting, bio and photo shown in the home-page header. Your name comes from the Site Title (Settings → General). Leave a field blank to use the default placeholder."
+msgstr ""
+
+#: functions.php:564
+msgid "Greeting"
+msgstr ""
+
+#: functions.php:568
+msgid "Shown in italics above your name."
+msgstr ""
+
+#: functions.php:573
+msgid "Bio"
+msgstr ""
+
+#: functions.php:576
+msgid "A sentence or two about who you are and what you write about."
+msgstr ""
+
+#: functions.php:580
+msgid "Photo"
+msgstr ""
+
+#: functions.php:591
+msgid "Select photo"
+msgstr ""
+
+#: functions.php:592
+msgid "Remove"
+msgstr ""
+
+#: functions.php:594
+msgid "A square image works best — it is shown as a circle. Defaults to a placeholder silhouette."
+msgstr ""
+
+#: functions.php:600
+msgid "Email & social links"
+msgstr ""
+
+#: functions.php:601
+msgid "These appear in the footer and on the Contact page, and feed the site’s structured data. Leave a field blank to hide it."
+msgstr ""
+
+#: functions.php:676
+msgid "Copyright"
+msgstr ""
+
+#. translators: 1: current year, 2: site name.
+#: functions.php:680
+#, php-format
+msgid "© %1$s %2$s"
+msgstr ""
+
+#: functions.php:722
+msgid "Welcome to Wove!"
+msgstr ""
+
+#: functions.php:723
+msgid "Finish setup in one click — it creates your Home, Blog, About and Contact pages and sets the front page."
+msgstr ""
+
+#: functions.php:725
+msgid "Set up Wove"
+msgstr ""
+
+#: functions.php:726
+msgid "Dismiss"
+msgstr ""
+
+#: functions.php:741
+#: functions.php:822
+msgid "Sorry, you are not allowed to do that."
+msgstr ""
+
+#: functions.php:753
+msgid "A few words about you — who you are and what you write about."
+msgstr ""
+
+#: functions.php:807
+msgid "Wove is set up."
+msgstr ""
+
+#: functions.php:808
+msgid "Your Home, Blog, About and Contact pages are ready."
+msgstr ""
+
+#: functions.php:810
+msgid "View your site →"
+msgstr ""
+
+#: patterns/404-content.php
+msgctxt "Pattern title"
+msgid "404 content"
+msgstr ""
+
+#: patterns/404-content.php:11
+msgid "Not found"
+msgstr ""
+
+#: patterns/404-content.php:15
+msgid "The page you’re looking for doesn’t exist. Try a search, or head back home."
+msgstr ""
+
+#: patterns/404-content.php:21
+msgid "← Back home"
+msgstr ""
+
+#: patterns/all-posts-link.php
+msgctxt "Pattern title"
+msgid "All posts link"
+msgstr ""
+
+#: patterns/all-posts-link.php:11
+msgid "All posts →"
+msgstr ""
+
+#: patterns/back-to-writing.php
+msgctxt "Pattern title"
+msgid "Back to writing link"
+msgstr ""
+
+#: patterns/back-to-writing.php:11
+msgid "← Back to Writing"
+msgstr ""
+
+#: patterns/intro-hero.php
+msgctxt "Pattern title"
+msgid "Intro hero"
+msgstr ""
+
+#: patterns/intro-hero.php
+msgctxt "Pattern description"
+msgid "Home-page introduction — greeting, name, and a short bio, with a portrait beside the text. Content comes from Appearance → Wove."
+msgstr ""
+
+#: patterns/intro-hero.php:24
+msgctxt "Portrait alt text"
+msgid "Portrait"
+msgstr ""
+
+#: patterns/no-results.php
+msgctxt "Pattern title"
+msgid "No results message"
+msgstr ""
+
+#: patterns/no-results.php:11
+msgid "No posts yet — check back soon."
+msgstr ""
+
+#: patterns/search-form.php
+msgctxt "Pattern title"
+msgid "Search form"
+msgstr ""
+
+#: patterns/search-form.php:10
+msgid "Search"
+msgstr ""
+
+#: patterns/search-form.php:10
+msgid "Search…"
+msgstr ""
+
+#: patterns/search-no-results.php
+msgctxt "Pattern title"
+msgid "Search no results"
+msgstr ""
+
+#: patterns/search-no-results.php:11
+msgid "No results found. Try another search."
+msgstr ""
+
+#: patterns/skip-link.php
+msgctxt "Pattern title"
+msgid "Skip link"
+msgstr ""
+
+#: patterns/skip-link.php:11
+msgid "Skip to content"
+msgstr ""
+
+#: patterns/writing-heading.php
+msgctxt "Pattern title"
+msgid "Writing heading (h2)"
+msgstr ""
+
+#: patterns/writing-heading.php:11
+#: patterns/writing-title.php:11
+msgid "Writing"
+msgstr ""
+
+#: patterns/writing-title.php
+msgctxt "Pattern title"
+msgid "Writing title (h1)"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Paper"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Ink"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Muted"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Rule"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Faint"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Newsreader"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Monospace"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Huge"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Display"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "1"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "3"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "4"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "5"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "6"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "7"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr ""
