@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint PHP
+        run: |
+          find . -name '*.php' -not -path './node_modules/*' -print0 \
+            | xargs -0 -n1 -P4 php -l
+
+      - name: Validate theme.json
+        run: |
+          php -r '$d = json_decode(file_get_contents("theme.json"));
+          if (json_last_error() !== JSON_ERROR_NONE) {
+            fwrite(STDERR, "theme.json invalid: " . json_last_error_msg() . "\n");
+            exit(1);
+          }
+          echo "theme.json OK\n";'
+
+      - name: Build theme zip
+        run: bash build.sh
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wove
+          path: wove.zip
+
+  release:
+    name: Release
+    needs: lint
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build theme zip
+        run: bash build.sh
+
+      - name: Publish release with zip
+        uses: softprops/action-gh-release@v2
+        with:
+          files: wove.zip
+          generate_release_notes: true
