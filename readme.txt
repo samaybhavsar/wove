@@ -3,7 +3,7 @@ Contributors: Samay Bhavsar
 Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, block-patterns, full-site-editing, editor-style, featured-images, threaded-comments, translation-ready, accessibility-ready, custom-colors, sticky-post
@@ -54,6 +54,9 @@ Dark mode follows each visitor's operating-system setting, and the header toggle
 Yes — **Appearance → Editor → Styles**.
 
 == Changelog ==
+
+= 1.1.0 =
+* The home-page intro (greeting, bio, photo) is now editable block content on the Home page instead of a theme option, so it is portable across theme switches and exports. Edit it in the block editor. Removed the "Home intro" fields from Appearance → Wove, which now manages email and social links only. Your name remains the Site Title.
 
 = 1.0.0 =
 * Initial release.

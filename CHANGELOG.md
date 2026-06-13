@@ -4,6 +4,14 @@ All notable changes to Wove are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/), and the project uses
 [semantic versioning](https://semver.org/).
 
+## [1.1.0] — 2026-06-13
+
+### Changed
+- The home-page introduction (greeting, bio, and photo) is now **editable block content on the Home page** instead of a theme option — so your intro is portable: it survives a theme switch or export, and you edit it in the block editor (Pages → Home). The name remains the Site Title.
+
+### Removed
+- The "Home intro" fields from **Appearance → Wove** (and the underlying option and media picker). The settings page now manages email and social links only.
+
 ## [1.0.0] — 2026-06-11
 
 ### Added

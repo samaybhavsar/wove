@@ -39,10 +39,9 @@ if ( ! function_exists( 'wove_setup' ) ) {
 			array(
 				'posts'   => array(
 					'home'    => array(
-						'post_type'  => 'page',
-						'post_title' => _x( 'Home', 'Starter page title', 'wove' ),
-						// Intentionally empty: the home hero is rendered by front-page.html
-						// (the wove/intro-hero pattern), with content from Appearance → Wove.
+						'post_type'    => 'page',
+						'post_title'   => _x( 'Home', 'Starter page title', 'wove' ),
+						'post_content' => wove_intro_block_markup(),
 					),
 					'blog'    => array(
 						'post_type'  => 'page',
@@ -407,15 +406,6 @@ if ( ! function_exists( 'wove_register_settings' ) ) {
 				'default'           => array(),
 			)
 		);
-		register_setting(
-			'wove_options',
-			'wove_intro',
-			array(
-				'type'              => 'array',
-				'sanitize_callback' => 'wove_sanitize_intro',
-				'default'           => array(),
-			)
-		);
 	}
 	add_action( 'admin_init', 'wove_register_settings' );
 }
@@ -441,46 +431,43 @@ if ( ! function_exists( 'wove_sanitize_social' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wove_sanitize_intro' ) ) {
+if ( ! function_exists( 'wove_intro_block_markup' ) ) {
 	/**
-	 * Sanitise the intro option (greeting text, bio text, photo attachment ID).
+	 * The home-page intro as portable block markup — greeting, name, bio, and a
+	 * portrait. Seeded into the Home page so it lives in post content: editable in
+	 * the block editor, and carried along on export or a theme switch (rather than
+	 * stored in a theme option). The name is the Site Title block (Settings →
+	 * General), which also feeds the SEO data.
 	 *
-	 * @param mixed $input Raw input.
-	 * @return array{greeting:string,bio:string,photo:int}
+	 * @return string
 	 */
-	function wove_sanitize_intro( $input ) {
-		$input = is_array( $input ) ? $input : array();
-		return array(
-			'greeting' => isset( $input['greeting'] ) ? sanitize_text_field( $input['greeting'] ) : '',
-			'bio'      => isset( $input['bio'] ) ? sanitize_textarea_field( $input['bio'] ) : '',
-			'photo'    => isset( $input['photo'] ) ? absint( $input['photo'] ) : 0,
-		);
-	}
-}
+	function wove_intro_block_markup() {
+		$greeting = esc_html_x( 'Hi, I’m', 'Greeting above the name', 'wove' );
+		$bio      = esc_html__( 'A short introduction goes here — a sentence or two about who you are and what you write about. Edit it right here on the Home page.', 'wove' );
+		$portrait = esc_url( get_template_directory_uri() . '/assets/images/portrait.svg' );
+		$alt      = esc_attr_x( 'Portrait', 'Portrait alt text', 'wove' );
 
-if ( ! function_exists( 'wove_get_intro' ) ) {
-	/**
-	 * Intro values with sensible placeholder fallbacks, so the hero is never blank.
-	 * The display name is intentionally NOT here — it comes from the Site Title
-	 * (Settings → General) via the site-title block, and also feeds the SEO data.
-	 *
-	 * @return array{greeting:string,bio:string,photo:int}
-	 */
-	function wove_get_intro() {
-		$intro = wp_parse_args(
-			(array) get_option( 'wove_intro', array() ),
-			array( 'greeting' => '', 'bio' => '', 'photo' => 0 )
-		);
+		return '<!-- wp:columns {"verticalAlignment":"center","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|40","left":"var:preset|spacing|50"}}}} -->
+<div class="wp-block-columns are-vertically-aligned-center"><!-- wp:column {"verticalAlignment":"center","width":"64%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:64%"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group"><!-- wp:paragraph {"textColor":"muted","fontSize":"large","style":{"typography":{"fontStyle":"italic","fontWeight":"400"}}} -->
+<p class="has-muted-color has-text-color has-large-font-size" style="font-style:italic;font-weight:400">' . $greeting . '</p>
+<!-- /wp:paragraph -->
 
-		if ( '' === trim( (string) $intro['greeting'] ) ) {
-			$intro['greeting'] = _x( 'Hi, I’m', 'Greeting above the name', 'wove' );
-		}
-		if ( '' === trim( (string) $intro['bio'] ) ) {
-			$intro['bio'] = __( 'A short introduction goes here — a sentence or two about who you are and what you write about. Edit this in Appearance → Wove.', 'wove' );
-		}
-		$intro['photo'] = (int) $intro['photo'];
+<!-- wp:site-title {"level":1,"isLink":false,"fontSize":"display","className":"wove-hero-name"} /-->
 
-		return $intro;
+<!-- wp:paragraph {"textColor":"muted","fontSize":"medium"} -->
+<p class="has-muted-color has-text-color has-medium-font-size">' . $bio . '</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center","width":"36%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:36%"><!-- wp:image {"className":"hero-portrait"} -->
+<figure class="wp-block-image hero-portrait"><img src="' . $portrait . '" alt="' . $alt . '"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->';
 	}
 }
 
@@ -500,49 +487,12 @@ if ( ! function_exists( 'wove_settings_page' ) ) {
 	add_action( 'admin_menu', 'wove_settings_page' );
 }
 
-if ( ! function_exists( 'wove_admin_assets' ) ) {
-	/**
-	 * On the Wove settings screen only, load the WordPress media picker (for the
-	 * intro photo) and the small script that wires it up.
-	 *
-	 * @param string $hook Current admin page hook suffix.
-	 */
-	function wove_admin_assets( $hook ) {
-		if ( 'appearance_page_wove-settings' !== $hook ) {
-			return;
-		}
-		wp_enqueue_media();
-		$path = get_template_directory() . '/assets/js/admin-settings.js';
-		$ver  = file_exists( $path ) ? (string) filemtime( $path ) : '1.0.0';
-		wp_enqueue_script(
-			'wove-admin-settings',
-			get_template_directory_uri() . '/assets/js/admin-settings.js',
-			array( 'jquery' ),
-			$ver,
-			true
-		);
-		wp_localize_script(
-			'wove-admin-settings',
-			'woveAdmin',
-			array(
-				'frameTitle'  => __( 'Select intro photo', 'wove' ),
-				'frameButton' => __( 'Use this photo', 'wove' ),
-			)
-		);
-	}
-	add_action( 'admin_enqueue_scripts', 'wove_admin_assets' );
-}
-
 if ( ! function_exists( 'wove_render_settings_page' ) ) {
 	/**
 	 * Render the settings form.
 	 */
 	function wove_render_settings_page() {
-		$values    = (array) get_option( 'wove_social', array() );
-		$intro_raw = (array) get_option( 'wove_intro', array() );
-		$greeting  = isset( $intro_raw['greeting'] ) ? (string) $intro_raw['greeting'] : '';
-		$bio       = isset( $intro_raw['bio'] ) ? (string) $intro_raw['bio'] : '';
-		$photo_id  = isset( $intro_raw['photo'] ) ? absint( $intro_raw['photo'] ) : 0;
+		$values = (array) get_option( 'wove_social', array() );
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Wove', 'wove' ); ?></h1>
@@ -554,48 +504,6 @@ if ( ! function_exists( 'wove_render_settings_page' ) ) {
 			?>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'wove_options' ); ?>
-
-				<h2><?php esc_html_e( 'Home intro', 'wove' ); ?></h2>
-				<p><?php esc_html_e( 'The greeting, bio and photo shown in the home-page header. Your name comes from the Site Title (Settings → General). Leave a field blank to use the default placeholder.', 'wove' ); ?></p>
-				<table class="form-table" role="presentation">
-					<tbody>
-						<tr>
-							<th scope="row">
-								<label for="wove_intro_greeting"><?php esc_html_e( 'Greeting', 'wove' ); ?></label>
-							</th>
-							<td>
-								<input type="text" id="wove_intro_greeting" name="wove_intro[greeting]" value="<?php echo esc_attr( $greeting ); ?>" class="regular-text" placeholder="<?php echo esc_attr_x( 'Hi, I’m', 'Greeting above the name', 'wove' ); ?>" />
-								<p class="description"><?php esc_html_e( 'Shown in italics above your name.', 'wove' ); ?></p>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">
-								<label for="wove_intro_bio"><?php esc_html_e( 'Bio', 'wove' ); ?></label>
-							</th>
-							<td>
-								<textarea id="wove_intro_bio" name="wove_intro[bio]" rows="3" class="large-text" placeholder="<?php esc_attr_e( 'A sentence or two about who you are and what you write about.', 'wove' ); ?>"><?php echo esc_textarea( $bio ); ?></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row"><?php esc_html_e( 'Photo', 'wove' ); ?></th>
-							<td>
-								<input type="hidden" id="wove_intro_photo" name="wove_intro[photo]" value="<?php echo esc_attr( (string) $photo_id ); ?>" />
-								<div id="wove-intro-photo-preview" class="wove-intro-photo-preview">
-									<?php
-									if ( $photo_id ) {
-										echo wp_get_attachment_image( $photo_id, array( 96, 96 ), false, array( 'style' => 'width:96px;height:96px;border-radius:50%;object-fit:cover;' ) );
-									}
-									?>
-								</div>
-								<p>
-									<button type="button" class="button" id="wove-intro-photo-select"><?php esc_html_e( 'Select photo', 'wove' ); ?></button>
-									<button type="button" class="button-link" id="wove-intro-photo-remove"<?php echo $photo_id ? '' : ' style="display:none;"'; ?>><?php esc_html_e( 'Remove', 'wove' ); ?></button>
-								</p>
-								<p class="description"><?php esc_html_e( 'A square image works best — it is shown as a circle. Defaults to a placeholder silhouette.', 'wove' ); ?></p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
 
 				<h2><?php esc_html_e( 'Email & social links', 'wove' ); ?></h2>
 				<p><?php esc_html_e( 'These appear in the footer and on the Contact page, and feed the site’s structured data. Leave a field blank to hide it.', 'wove' ); ?></p>
@@ -747,9 +655,8 @@ if ( ! function_exists( 'wove_run_setup' ) ) {
 			'about'   => _x( 'About', 'Starter page title', 'wove' ),
 			'contact' => _x( 'Contact', 'Starter page title', 'wove' ),
 		);
-		// Home is intentionally absent: its hero is rendered by front-page.html
-		// (the wove/intro-hero pattern), with content from Appearance → Wove.
 		$content = array(
+			'home'    => wove_intro_block_markup(),
 			'about'   => '<!-- wp:paragraph --><p>' . esc_html__( 'A few words about you — who you are and what you write about.', 'wove' ) . '</p><!-- /wp:paragraph -->',
 			'contact' => '<!-- wp:wove/social-links /-->',
 		);

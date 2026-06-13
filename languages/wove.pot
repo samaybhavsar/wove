@@ -9,16 +9,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-12T20:48:23+00:00\n"
+"POT-Creation-Date: 2026-06-13T15:46:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wove\n"
 
 #. Theme Name of the theme
 #: style.css
-#: functions.php:100
-#: functions.php:494
-#: functions.php:548
+#: functions.php:99
+#: functions.php:481
+#: functions.php:498
 msgid "Wove"
 msgstr ""
 
@@ -43,189 +43,145 @@ msgid "https://samay.io"
 msgstr ""
 
 #: functions.php:43
-#: functions.php:745
+#: functions.php:653
 msgctxt "Starter page title"
 msgid "Home"
 msgstr ""
 
-#: functions.php:49
-#: functions.php:746
+#: functions.php:48
+#: functions.php:654
 msgctxt "Starter page title"
 msgid "Blog"
 msgstr ""
 
-#: functions.php:53
-#: functions.php:747
+#: functions.php:52
+#: functions.php:655
 msgctxt "Starter page title"
 msgid "About"
 msgstr ""
 
-#: functions.php:54
+#: functions.php:53
 msgid "A few words about you — who you are and what you write about. Edit this on the About page."
 msgstr ""
 
-#: functions.php:58
-#: functions.php:748
+#: functions.php:57
+#: functions.php:656
 msgctxt "Starter page title"
 msgid "Contact"
 msgstr ""
 
-#: functions.php:119
+#: functions.php:118
 msgid "Reading time"
 msgstr ""
 
 #. translators: %d: estimated reading time in minutes.
-#: functions.php:128
+#: functions.php:127
 #, php-format
 msgid "· %d min read"
 msgstr ""
 
-#: functions.php:328
+#: functions.php:327
 msgid "Email"
 msgstr ""
 
-#: functions.php:329
+#: functions.php:328
 msgid "GitHub"
 msgstr ""
 
-#: functions.php:330
+#: functions.php:329
 msgid "LinkedIn"
 msgstr ""
 
-#: functions.php:331
+#: functions.php:330
 msgid "X"
 msgstr ""
 
-#: functions.php:332
+#: functions.php:331
 msgid "Mastodon"
 msgstr ""
 
-#: functions.php:333
+#: functions.php:332
 msgid "Instagram"
 msgstr ""
 
-#: functions.php:369
+#: functions.php:368
 msgid "RSS"
 msgstr ""
 
-#: functions.php:476
-#: functions.php:567
+#: functions.php:445
 msgctxt "Greeting above the name"
 msgid "Hi, I’m"
 msgstr ""
 
-#: functions.php:479
-msgid "A short introduction goes here — a sentence or two about who you are and what you write about. Edit this in Appearance → Wove."
+#: functions.php:446
+msgid "A short introduction goes here — a sentence or two about who you are and what you write about. Edit it right here on the Home page."
 msgstr ""
 
-#: functions.php:493
+#: functions.php:448
+msgctxt "Portrait alt text"
+msgid "Portrait"
+msgstr ""
+
+#: functions.php:480
 msgid "Wove Settings"
 msgstr ""
 
-#: functions.php:528
-msgid "Select intro photo"
-msgstr ""
-
-#: functions.php:529
-msgid "Use this photo"
-msgstr ""
-
-#: functions.php:551
+#: functions.php:501
 msgid "Settings saved."
 msgstr ""
 
-#: functions.php:558
-msgid "Home intro"
-msgstr ""
-
-#: functions.php:559
-msgid "The greeting, bio and photo shown in the home-page header. Your name comes from the Site Title (Settings → General). Leave a field blank to use the default placeholder."
-msgstr ""
-
-#: functions.php:564
-msgid "Greeting"
-msgstr ""
-
-#: functions.php:568
-msgid "Shown in italics above your name."
-msgstr ""
-
-#: functions.php:573
-msgid "Bio"
-msgstr ""
-
-#: functions.php:576
-msgid "A sentence or two about who you are and what you write about."
-msgstr ""
-
-#: functions.php:580
-msgid "Photo"
-msgstr ""
-
-#: functions.php:591
-msgid "Select photo"
-msgstr ""
-
-#: functions.php:592
-msgid "Remove"
-msgstr ""
-
-#: functions.php:594
-msgid "A square image works best — it is shown as a circle. Defaults to a placeholder silhouette."
-msgstr ""
-
-#: functions.php:600
+#: functions.php:508
 msgid "Email & social links"
 msgstr ""
 
-#: functions.php:601
+#: functions.php:509
 msgid "These appear in the footer and on the Contact page, and feed the site’s structured data. Leave a field blank to hide it."
 msgstr ""
 
-#: functions.php:676
+#: functions.php:584
 msgid "Copyright"
 msgstr ""
 
 #. translators: 1: current year, 2: site name.
-#: functions.php:680
+#: functions.php:588
 #, php-format
 msgid "© %1$s %2$s"
 msgstr ""
 
-#: functions.php:722
+#: functions.php:630
 msgid "Welcome to Wove!"
 msgstr ""
 
-#: functions.php:723
+#: functions.php:631
 msgid "Finish setup in one click — it creates your Home, Blog, About and Contact pages and sets the front page."
 msgstr ""
 
-#: functions.php:725
+#: functions.php:633
 msgid "Set up Wove"
 msgstr ""
 
-#: functions.php:726
+#: functions.php:634
 msgid "Dismiss"
 msgstr ""
 
-#: functions.php:741
-#: functions.php:822
+#: functions.php:649
+#: functions.php:729
 msgid "Sorry, you are not allowed to do that."
 msgstr ""
 
-#: functions.php:753
+#: functions.php:660
 msgid "A few words about you — who you are and what you write about."
 msgstr ""
 
-#: functions.php:807
+#: functions.php:714
 msgid "Wove is set up."
 msgstr ""
 
-#: functions.php:808
+#: functions.php:715
 msgid "Your Home, Blog, About and Contact pages are ready."
 msgstr ""
 
-#: functions.php:810
+#: functions.php:717
 msgid "View your site →"
 msgstr ""
 
@@ -271,12 +227,7 @@ msgstr ""
 
 #: patterns/intro-hero.php
 msgctxt "Pattern description"
-msgid "Home-page introduction — greeting, name, and a short bio, with a portrait beside the text. Content comes from Appearance → Wove."
-msgstr ""
-
-#: patterns/intro-hero.php:24
-msgctxt "Portrait alt text"
-msgid "Portrait"
+msgid "Home-page introduction — greeting, name, and a short bio, with a portrait beside the text."
 msgstr ""
 
 #: patterns/no-results.php
